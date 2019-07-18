@@ -1,6 +1,6 @@
-# Put.io Fetcher
+# My Local Put.io
 #
-# Put.io download script! The easiest way to have all all your put.io files locally.
+# The easiest script to synchronise all your put.io files locally.
 #
 # Created by: Rafael Biriba - biribarj@gmail.com
 # More info: https://github.com/rafaelbiriba/my-local-putio

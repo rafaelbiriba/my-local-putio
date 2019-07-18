@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    putio_fetcher (0.1.0)
+    my-local-putio (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -13,7 +13,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  putio_fetcher!
+  my-local-putio!
   rake (~> 10.0)
 
 BUNDLED WITH

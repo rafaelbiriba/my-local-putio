@@ -1,4 +1,4 @@
-module PutioFetcher
+module MyLocalPutio
   class Configuration
     attr_reader :token, :destination, :verbose, :debug
     def initialize

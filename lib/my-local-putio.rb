@@ -23,5 +23,5 @@ require "putio_fetcher/logger"
 require "putio_fetcher/putio_cli"
 require "putio_fetcher/fetcher"
 
-module PutioFetcher
+module MyLocalPutio
 end

@@ -1,4 +1,4 @@
-module PutioFetcher
+module MyLocalPutio
   class Fetcher
     attr_reader :configuration, :cli, :logger
 

@@ -1,4 +1,4 @@
-module PutioFetcher
+module MyLocalPutio
   class PutioCli
     ROOT = "https://api.put.io/v2/"
     attr_reader :configuration, :endpoint, :http, :logger

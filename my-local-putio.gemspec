@@ -1,21 +1,21 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "putio_fetcher/version"
+require "my-local-putio/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "putio_fetcher"
-  spec.version       = PutioFetcher::VERSION
+  spec.name          = "my-local-putio"
+  spec.version       = MyLocalPutio::VERSION
   spec.authors       = ["Rafael Biriba"]
   spec.email         = ["biribarj@gmail.com"]
 
-  spec.summary       = "Put.io download script! The easiest way to have all all your put.io files locally."
-  spec.description   = "Put.io download script! The easiest way to have all all your put.io files locally."
-  spec.homepage      = "https://github.com/rafaelbiriba/putio_fetcher"
+  spec.summary       = "The easiest script to synchronise all your put.io files locally."
+  spec.description   = "The easiest script to synchronise all your put.io files locally."
+  spec.homepage      = "https://github.com/rafaelbiriba/my-local-putio"
   spec.license       = "MIT"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/rafaelbiriba/putio_fetcher"
-  spec.metadata["changelog_uri"] = "https://github.com/rafaelbiriba/putio_fetcher/blob/master/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/rafaelbiriba/my-local-putio"
+  spec.metadata["changelog_uri"] = "https://github.com/rafaelbiriba/my-local-putio/blob/master/CHANGELOG.md"
 
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

@@ -101,7 +101,6 @@ class PutIO
     @configuration, @endpoint, @logger = configuration, URI(endpoint), logger
     @http = Net::HTTP.new(@endpoint.host, @endpoint.port)
     @http.use_ssl = true
-    # Not good ...
     @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
   end
 

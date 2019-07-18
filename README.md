@@ -28,6 +28,7 @@ Put.io Fetcher or the script author will not take responsibility for any of your
 * Install ruby 2.6.0+
 * Create an "application" here and note down the TOKEN: https://put.io/v2/oauth2/applications
 * Download the script code from githug or via wget command below:
+
       wget https://raw.githubusercontent.com/rafaelbiriba/putio-fetcher/master/putio-fetcher.rb
 
 ## Usage

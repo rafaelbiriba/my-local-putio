@@ -8,7 +8,7 @@
 # Copyright disclaimer:
 # Put.io fetcher uses the official Put.io API v2. Use this tool for legal purposes
 # only. You are the only one responsible for what you are downloading from
-# your put.io account, ensuring that your download does not infringe any legal 
+# your put.io account, ensuring that your download does not infringe any legal
 # or copyright constraints. Put.io Fetcher or the script author will not take
 # responsibility for any of your downloading acts.
 
@@ -132,14 +132,14 @@ class PutIO
     as_json http.request(req)
   end
 
-  def post(path, args={})
-    url = to_url(path)
-    args = to_args(args)
-    logger.debug "POST #{url} -- #{args.inspect}"
-    req = Net::HTTP::Post.new("/users")
-    req.set_form_data(args)
-    as_json http.request(req)
-  end
+  # def post(path, args={})
+  #   url = to_url(path)
+  #   args = to_args(args)
+  #   logger.debug "POST #{url} -- #{args.inspect}"
+  #   req = Net::HTTP::Post.new("/users")
+  #   req.set_form_data(args)
+  #   as_json http.request(req)
+  # end
 
   def to_url(path)
     url = endpoint.dup

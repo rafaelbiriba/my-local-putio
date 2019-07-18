@@ -1,4 +1,4 @@
-My Local Put.io
+My Local Put.io [![Gem Version](https://badge.fury.io/rb/my-local-putio.svg)](http://badge.fury.io/rb/my-local-putio) [![Code Climate](https://codeclimate.com/github/rafaelbiriba/my-local-putio/badges/gpa.svg)](https://codeclimate.com/github/rafaelbiriba/my-local-putio)
 ===========
 
 The easiest script to synchronize all your [Put.io](http://put.io) files locally.

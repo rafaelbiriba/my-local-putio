@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "putio_fetcher"
+
+unless open(__FILE__).flock(File::LOCK_EX | File::LOCK_NB)
+  puts "Script already running..."
+  exit
+end
+
+configuration = PutioFetcher::Configuration.new
+logger = PutioFetcher::Logger.new(configuration)
+putio_cli = PutioFetcher::PutioCli.new(configuration, logger)
+PutioFetcher::Fetcher.new(configuration, putio_cli, logger).run!

@@ -38,19 +38,19 @@ For now the script only supports download the content from your account and keep
     my-local-putio -h
 
     Usage: my-local-putio [options]
-    -t, --token TOKEN                Put.io access token [REQUIRED]
-    -d, --destination DESTINATION    Destination path [REQUIRED]
-    -v, --verbose                    Show messages and progress bar
-        --debug                      Debug mode [Developer mode]
+        -t, --token TOKEN                Put.io access token [REQUIRED]
+        -l, --local-destination PATH     Local destination path [REQUIRED]
+        -s, --silent                     Hide all messages and progress bar
+        -d, --debug                      Debug mode [Developer mode]
 
 #### Required attributes:
 * **-t** or **--token**: Your Put.io Token. This attribute becames optional if you set `PUTIO_TOKEN` env variable with your token (Can be inline or into your bash profile). Check examples below.
-* **-d** or **--destination**: Local destination folder
+* **-l** or **--local-destination**: Local destination folder
 
 Examples:
 
-    my-local-putio -t 123 -d Downloads
-    my-local-putio -d Downloads --token 123
+    my-local-putio -t 123 -l Downloads
+    my-local-putio -l Downloads --token 123
 
 With Token variable (inline or exporting):
 
@@ -61,15 +61,15 @@ With Token variable (inline or exporting):
 
 #### Others attributes:
 * **-h**: Print the help usage message
-* **-v** or **--verbose**: Show useful information about your downloads
-* **--debug**: Developer mode: Prints everything (also verbose messages) and expose URLs with tokens for debug purposes.
+* **-s** or **--silent**: Hide all messages and progress bar
+* **-d** or **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
 
 Examples:
 
     my-local-putio -h
-    my-local-putio -t 123 -d Downloads --verbose
-    my-local-putio -t 123 -d Downloads -v
-    my-local-putio --destination Downloads -t 123 --debug
+    my-local-putio -t 123 -l Downloads --silent
+    my-local-putio -t 123 -l Downloads -s
+    my-local-putio --local-destination Downloads -t 123 --debug
 
 Verbose output example:
 

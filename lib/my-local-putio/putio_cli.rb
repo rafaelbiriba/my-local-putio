@@ -16,18 +16,12 @@ module MyLocalPutio
     end
 
     def get_download_url(id)
-      # Follow redirect plz
       url = to_url("files/#{id}/download")
       url.query = URI.encode_www_form to_args()
       url
     end
 
     protected
-
-    def log(msg)
-      return unless configuration.verbose
-      puts msg
-    end
 
     def get(path, args={})
       url = to_url(path)

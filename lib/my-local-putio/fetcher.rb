@@ -12,7 +12,7 @@ module MyLocalPutio
 
     protected
 
-    def fetch_files(id: nil, path: configuration.destination)
+    def fetch_files(id: nil, path: configuration.local_destination)
       FileUtils.mkdir_p(path)
       logger.log "Getting files for #{path}"
       files = cli.get_files(id)["files"]
@@ -40,7 +40,7 @@ module MyLocalPutio
       command = [
         "curl", "--progress-bar", "-L", "--retry", "5", "-S", "-C", "-", "-o", path, url.to_s
       ]
-      command.push("--silent") unless logger.verbose?
+      command.push("--silent") if logger.silent?
       system(*command)
     end
   end

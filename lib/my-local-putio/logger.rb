@@ -6,8 +6,8 @@ module MyLocalPutio
         @configuration = configuration
     end
 
-    def verbose?
-      configuration.verbose
+    def silent?
+      configuration.silent
     end
 
     def debug?
@@ -16,15 +16,19 @@ module MyLocalPutio
 
     def debug(msg)
       return unless debug?
-      puts "[DEBUG][#{time_now}] #{msg}"
+      print_msg "[DEBUG][#{time_now}] #{msg}"
     end
 
     def log(msg)
-      return unless verbose? || debug?
-      puts "[LOG][#{time_now}] #{msg}"
+      print_msg "[LOG][#{time_now}] #{msg}"
     end
 
     private
+
+    def print_msg(msg)
+      return if silent?
+      puts msg
+    end
 
     def time_now
       Time.now.strftime("%F %H:%M:%S")

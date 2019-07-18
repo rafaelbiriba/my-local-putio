@@ -54,10 +54,10 @@ Examples:
 
 With Token variable (inline or exporting):
 
-      PUTIO_TOKEN=123 my-local-putio -d Downloads
+      PUTIO_TOKEN=123 my-local-putio -l Downloads
 
       export PUTIO_TOKEN=123
-      my-local-putio -d Downloads
+      my-local-putio --local-destination Downloads/
 
 #### Others attributes:
 * **-h**: Print the help usage message

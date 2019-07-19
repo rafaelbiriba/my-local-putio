@@ -1,3 +1,9 @@
+# v2.1.0
+
+- Introducing SOCKS5 support with `--socks5-proxy` option.
+- Adding `--version` option
+- Small refactoring for error handling during the boot
+
 # v2.0.0
 
 - Breaking changes parameters

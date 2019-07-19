@@ -1,12 +1,14 @@
 PATH
   remote: .
   specs:
-    my-local-putio (2.0.0)
+    my-local-putio (2.1.0)
+      socksify (= 1.7.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
     rake (10.5.0)
+    socksify (1.7.1)
 
 PLATFORMS
   ruby

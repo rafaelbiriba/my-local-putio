@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    my-local-putio (1.0.1)
+    my-local-putio (2.0.0)
 
 GEM
   remote: https://rubygems.org/

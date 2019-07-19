@@ -16,6 +16,7 @@ module MyLocalPutio
           puts MyLocalPutio::VERSION
           exit
         end
+
         opt.on("-s", "--silent", "Hide all messages and progress bar") { |v| @silent = true }
         opt.on("-d", "--debug", "Debug mode [Developer mode]") { |v| @debug = true }
       end.parse!
@@ -23,11 +24,19 @@ module MyLocalPutio
 
     def validate_args!
       unless @token
-        raise OptionParser::MissingArgument.new("--token")
+        puts "Missing token"
+        exit
       end
 
       unless @local_destination
-        raise OptionParser::MissingArgument.new("--local-destination")
+        puts "Missing local destination"
+        exit
+      end
+
+      unless File.writable?(@local_destination)
+        puts "Cannot write on the local destination path '#{@local_destination}'"
+        exit
+      end
       end
     end
 

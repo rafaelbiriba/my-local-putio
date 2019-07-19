@@ -12,6 +12,10 @@ module MyLocalPutio
       OptionParser.new do |opt|
         opt.on("-t", "--token TOKEN", "Put.io access token [REQUIRED]") { |v| @token = v }
         opt.on("-l", "--local-destination PATH", "Local destination path [REQUIRED]") { |v| @local_destination = v }
+        opt.on("-v", "--version", "Print my-local-putio version") do
+          puts MyLocalPutio::VERSION
+          exit
+        end
         opt.on("-s", "--silent", "Hide all messages and progress bar") { |v| @silent = true }
         opt.on("-d", "--debug", "Debug mode [Developer mode]") { |v| @debug = true }
       end.parse!

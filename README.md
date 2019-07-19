@@ -40,6 +40,7 @@ For now the script only supports download the content from your account and keep
     Usage: my-local-putio [options]
         -t, --token TOKEN                Put.io access token [REQUIRED]
         -l, --local-destination PATH     Local destination path [REQUIRED]
+        -v, --version                    Print my-local-putio version
         -s, --silent                     Hide all messages and progress bar
         -d, --debug                      Debug mode [Developer mode]
 
@@ -61,6 +62,7 @@ With Token variable (inline or exporting):
 
 #### Others attributes:
 * **-h**: Print the help usage message
+* **-v** or **--version**: Print the version of the application
 * **-s** or **--silent**: Hide all messages and progress bar
 * **-d** or **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
 

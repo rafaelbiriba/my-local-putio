@@ -3,7 +3,7 @@ module MyLocalPutio
     attr_reader :configuration
 
     def initialize(configuration)
-        @configuration = configuration
+      @configuration = configuration
     end
 
     def silent?

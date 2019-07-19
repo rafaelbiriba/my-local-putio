@@ -9,6 +9,4 @@ unless open(__FILE__).flock(File::LOCK_EX | File::LOCK_NB)
 end
 
 configuration = MyLocalPutio::Configuration.new
-logger = MyLocalPutio::Logger.new(configuration)
-putio_cli = MyLocalPutio::PutioCli.new(configuration, logger)
-MyLocalPutio::Fetcher.new(configuration, putio_cli, logger).run!
+MyLocalPutio::Fetcher.new(configuration).run!

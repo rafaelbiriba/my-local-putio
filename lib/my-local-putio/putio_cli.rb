@@ -3,8 +3,10 @@ module MyLocalPutio
     ROOT = "https://api.put.io/v2/"
     attr_reader :configuration, :endpoint, :http, :logger
 
-    def initialize(configuration, endpoint=ROOT, logger)
-      @configuration, @endpoint, @logger = configuration, URI(endpoint), logger
+    def initialize(configuration)
+      @configuration = configuration
+      @logger = configuration.logger
+      @endpoint = URI(ROOT)
       @http = http_library.new(@endpoint.host, @endpoint.port)
       @http.use_ssl = true
       @http.verify_mode = OpenSSL::SSL::VERIFY_NONE

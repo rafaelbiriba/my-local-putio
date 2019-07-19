@@ -11,6 +11,10 @@ module MyLocalPutio
       @socks_host || @socks_port
     end
 
+    def logger
+      @logger ||= Logger.new(self)
+    end
+
     private
     def parse_args!
       OptionParser.new do |opt|

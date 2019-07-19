@@ -40,7 +40,13 @@ module MyLocalPutio
       command = [
         "curl", "--progress-bar", "-L", "--retry", "5", "-S", "-C", "-", "-o", path, url.to_s
       ]
+      
       command.push("--silent") if logger.silent?
+
+      if configuration.socks_enabled?
+        command.push("--socks5-hostname", "#{configuration.socks_host}:#{configuration.socks_port}")
+      end
+
       system(*command)
     end
   end

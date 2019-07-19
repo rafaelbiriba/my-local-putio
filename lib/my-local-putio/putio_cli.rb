@@ -5,7 +5,7 @@ module MyLocalPutio
 
     def initialize(configuration, endpoint=ROOT, logger)
       @configuration, @endpoint, @logger = configuration, URI(endpoint), logger
-      @http = Net::HTTP.new(@endpoint.host, @endpoint.port)
+      @http = http_library.new(@endpoint.host, @endpoint.port)
       @http.use_ssl = true
       @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
@@ -22,6 +22,14 @@ module MyLocalPutio
     end
 
     protected
+
+    def http_library
+      if @configuration.socks_enabled?
+        Net::HTTP::SOCKSProxy(@configuration.socks_host, @configuration.socks_port)
+      else
+        Net::HTTP
+      end
+    end
 
     def get(path, args={})
       url = to_url(path)

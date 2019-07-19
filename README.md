@@ -8,6 +8,7 @@ For now the script only supports download the content from your account and keep
 ### Features
 
 - Check and skip already downloaded files
+- Supports SOCKS5 proxy for an even more secure and anonymous transfer, with kill switch, so the application will stop if the proxy became unavailable. No leak connections.
 - Resume broken/stopped downloads, so you don't have to start from the begin of your huge file.
 - Simple and easy to run
 
@@ -43,6 +44,7 @@ For now the script only supports download the content from your account and keep
         -v, --version                    Print my-local-putio version
         -s, --silent                     Hide all messages and progress bar
         -d, --debug                      Debug mode [Developer mode]
+        --socks5-proxy hostname:port SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234
 
 #### Required attributes:
 * **-t** or **--token**: Your Put.io Token. This attribute becames optional if you set `PUTIO_TOKEN` env variable with your token (Can be inline or into your bash profile). Check examples below.
@@ -65,6 +67,7 @@ With Token variable (inline or exporting):
 * **-v** or **--version**: Print the version of the application
 * **-s** or **--silent**: Hide all messages and progress bar
 * **-d** or **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
+* **--socks5-proxy**: Enable the SOCKS5 proxy. If enabled, all the connections for PUT.IO API and the downloads will be performed using this proxy. If the socks connection became unavailable, the application will raise an error and will stop.
 
 Examples:
 
@@ -72,6 +75,7 @@ Examples:
     my-local-putio -t 123 -l Downloads --silent
     my-local-putio -t 123 -l Downloads -s
     my-local-putio --local-destination Downloads -t 123 --debug
+    my-local-putio --local-destination Downloads -t 123 --socks5-proxy 127.0.0.1:3333
 
 Verbose output example:
 

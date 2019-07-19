@@ -13,6 +13,8 @@
 # responsibility for any of your downloading acts.
 
 require "net/http"
+require "socksify/http"
+require "socket"
 require "openssl"
 require "ostruct"
 require "yaml"

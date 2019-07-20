@@ -11,10 +11,10 @@ For now the script only supports download the content from your account and keep
 - Supports SOCKS5 proxy for an even more secure and anonymous transfer, with kill switch, so the application will stop if the proxy became unavailable. No leak connections.
 - Resume broken/stopped downloads, so you don't have to start from the begin of your huge file.
 - Simple and easy to run
+- Option to delete the file from put.io after the download
 
 #### Planned features:
 
-- Option to delete the file on put.io after sync
 - Option to download the subtitle if available in put.io list
 
 #### Future or ideas: (Feel free to contribute to the list)
@@ -39,12 +39,13 @@ For now the script only supports download the content from your account and keep
     my-local-putio -h
 
     Usage: my-local-putio [options]
-        -t, --token TOKEN                Put.io access token [REQUIRED]
-        -l, --local-destination PATH     Local destination path [REQUIRED]
-        -v, --version                    Print my-local-putio version
-        -s, --silent                     Hide all messages and progress bar
-        -d, --debug                      Debug mode [Developer mode]
-        --socks5-proxy hostname:port SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234
+      -t, --token TOKEN                Put.io access token [REQUIRED]
+      -l, --local-destination PATH     Local destination path [REQUIRED]
+      -d, --delete-remote              Delete remote file/folder after the download
+      -v, --version                    Print my-local-putio version
+      -s, --silent                     Hide all messages and progress bar
+          --debug                      Debug mode [Developer mode]
+          --socks5-proxy hostname:port SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234
 
 #### Required attributes:
 * **-t** or **--token**: Your Put.io Token. This attribute becames optional if you set `PUTIO_TOKEN` env variable with your token (Can be inline or into your bash profile). Check examples below.
@@ -63,26 +64,37 @@ With Token variable (inline or exporting):
       my-local-putio --local-destination Downloads/
 
 #### Others attributes:
+* **-d** or **--delete-remote**: Delete the remote file/folder from put.io after downloading
 * **-h**: Print the help usage message
 * **-v** or **--version**: Print the version of the application
 * **-s** or **--silent**: Hide all messages and progress bar
-* **-d** or **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
+* **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
 * **--socks5-proxy**: Enable the SOCKS5 proxy. If enabled, all the connections for PUT.IO API and the downloads will be performed using this proxy. If the socks connection became unavailable, the application will raise an error and will stop.
 
 Examples:
 
     my-local-putio -h
-    my-local-putio -t 123 -l Downloads --silent
+    my-local-putio -t 123 -l Downloads --silent -d
     my-local-putio -t 123 -l Downloads -s
     my-local-putio --local-destination Downloads -t 123 --debug
     my-local-putio --local-destination Downloads -t 123 --socks5-proxy 127.0.0.1:3333
 
 Verbose output example:
 
-    [LOG][2019-07-18 11:11:30] Getting files for Downloads
-    [LOG][2019-07-18 11:11:31] Getting files for Downloads/ubuntu-18.04.2-desktop-amd64.iso
-    [LOG][2019-07-18 11:11:31] Downloading: Downloads/ubuntu-18.04.2-desktop-amd64.iso
+    my-local-putio -t 123 -l Downloads -d --socks5-proxy 127.0.0.1:3333
+
+    Starting My Local Put.io - version 3.0.0
+    https://github.com/rafaelbiriba/my-local-putio
+    =============================================
+    Full path of the local destination: /Users/user/Downloads
+    >>> Delete remote files enabled!
+    >>> SOCKS5 enabled with 127.0.0.1:3333
+    =============================================
+    [LOG][2019-07-18 11:11:30] Getting file list for /
+    [LOG][2019-07-18 11:11:31] Getting file list for /ubuntu
+    [LOG][2019-07-18 11:11:31] Downloading: /ubuntu/ubuntu-18.04.2-desktop-amd64.iso
     ######################################################################## 100.0%
+    [LOG][2019-07-18 11:11:33] Deleting remote file: /ubuntu/ubuntu-18.04.2-desktop-amd64.iso
 
 #### Troubleshooting
 

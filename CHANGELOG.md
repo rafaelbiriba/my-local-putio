@@ -1,3 +1,11 @@
+# v3.0.0
+
+- Introducing delete from remote after downloading
+- Breaking changes parameters
+  - removed -d option for --debug. Now debug is only available as --debug
+  - introduced -d option for --delete-remote
+- More code refactoring
+
 # v2.1.0
 
 - Introducing SOCKS5 support with `--socks5-proxy` option.

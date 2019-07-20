@@ -15,7 +15,7 @@ module MyLocalPutio
     protected
 
     def fetch_files(id: nil, path: "/")
-      logger.log "Getting file list for #{path}"
+      logger.log "Getting remote file list for #{path}"
       files = cli.get_files(id)["files"]
 
       while files.any?

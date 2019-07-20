@@ -7,14 +7,23 @@ module MyLocalPutio
       @configuration = configuration
       @logger = configuration.logger
       @endpoint = URI(ROOT)
-      @http = http_library.new(@endpoint.host, @endpoint.port)
-      @http.use_ssl = true
-      @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      setup_connection
     end
 
     def get_files(parent_id=nil)
       args = parent_id ? {parent_id: parent_id} : {}
       get("files/list", args)
+    end
+
+    def delete_file(id)
+      args = {file_ids: id}
+      post("files/delete", args)
+    end
+
+    def delete_file_url
+      url = to_url("files/delete")
+      url.query = URI.encode_www_form to_args()
+      url
     end
 
     def get_download_url(id)
@@ -33,6 +42,12 @@ module MyLocalPutio
       end
     end
 
+    def setup_connection
+      @http = http_library.new(@endpoint.host, @endpoint.port)
+      @http.use_ssl = true
+      @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+
     def get(path, args={})
       url = to_url(path)
       url.query = URI.encode_www_form to_args(args)
@@ -41,14 +56,14 @@ module MyLocalPutio
       as_json http.request(req)
     end
 
-    # def post(path, args={})
-    #   url = to_url(path)
-    #   args = to_args(args)
-    #   logger.debug "POST #{url} -- #{args.inspect}"
-    #   req = Net::HTTP::Post.new("/users")
-    #   req.set_form_data(args)
-    #   as_json http.request(req)
-    # end
+    def post(path, args={})
+      url = to_url(path)
+      args = to_args(args)
+      logger.debug "POST #{url} -- #{args.inspect}"
+      req = Net::HTTP::Post.new(url)
+      req.set_form_data(args)
+      as_json http.request(req)
+    end
 
     def to_url(path)
       url = endpoint.dup

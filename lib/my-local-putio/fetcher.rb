@@ -14,9 +14,8 @@ module MyLocalPutio
 
     protected
 
-    def fetch_files(id: nil, path: configuration.local_destination)
-      FileUtils.mkdir_p(path)
-      logger.log "Getting files for #{path}"
+    def fetch_files(id: nil, path: "/")
+      logger.log "Getting file list for #{path}"
       files = cli.get_files(id)["files"]
 
       while files.any?
@@ -26,25 +25,31 @@ module MyLocalPutio
     end
 
     def process_file(file, path)
-      file_path = File.join(path, file.name)
+      local_file_path = File.join(path, file.name)
       if file.content_type == "application/x-directory"
-        fetch_files(id: file.id, path: file_path)
+        fetch_files(id: file.id, path: local_file_path)
       else
-        return if file_exists?(file_path, file)
-        url = cli.get_download_url file.id
-        download(url, file_path)
+        download(file, local_file_path) unless file_exists?(local_file_path, file)
       end
+      delete_file(local_file_path, file)
     end
 
-    def file_exists?(file_path, file)
-      file_exists = File.exists?(file_path) && File.size(file_path) == file.size
-      logger.log "File already downloaded #{file_path}" if file_exists
+    def delete_file(local_file_path, file)
+      logger.log "Deleting remote file: #{local_file_path}"
+      cli.delete_file(file.id)
+    end
+
+    def file_exists?(local_file_path, file)
+      file_exists = File.exists?(local_file_path) && File.size(local_file_path) == file.size
+      logger.log "File already downloaded #{local_file_path}" if file_exists
       file_exists
     end
 
     def download_command(url, path)
+      destination = File.join(configuration.local_destination, path)
+
       command = [
-        "curl", "--progress-bar", "-L", "--retry", "5", "-S", "-C", "-", "-o", path, url.to_s
+        "curl", "--create-dirs", "--progress-bar", "-L", "--retry", "5", "-S", "-C", "-", "-o", destination, url.to_s
       ]
 
       command.push("--silent") if logger.silent?
@@ -56,7 +61,8 @@ module MyLocalPutio
       return command
     end
 
-    def download(url, path)
+    def download(file, path)
+      url = cli.get_download_url(file.id)
       command = download_command(url, path)
       logger.log "Downloading: #{path}"
       fetch_result = system(*command)

@@ -9,4 +9,5 @@ unless open(__FILE__).flock(File::LOCK_EX | File::LOCK_NB)
 end
 
 configuration = MyLocalPutio::Configuration.new
+MyLocalPutio.print_introduction_msg(configuration)
 MyLocalPutio::Fetcher.new(configuration).run!

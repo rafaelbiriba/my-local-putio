@@ -26,4 +26,16 @@ require "my-local-putio/putio_cli"
 require "my-local-putio/fetcher"
 
 module MyLocalPutio
+  def self.print_introduction_msg(configuration)
+    return if configuration.silent
+    puts "Starting My Local Put.io - version #{VERSION}"
+    puts "https://github.com/rafaelbiriba/my-local-putio"
+    puts "============================================="
+    puts "Full path of the local destination: #{File.realdirpath(configuration.local_destination)}"
+    puts ">>> Delete remote files enabled!" if configuration.delete_remote
+    puts ">>> SOCKS5 enabled with #{configuration.socks_host}:#{configuration.socks_port}" if configuration.socks_enabled?
+    puts ">>> DEBUG enabled! Hello Mr(s) developer :)" if configuration.debug
+    puts "============================================="
+    sleep 2 # In case the configurations are not correct, 2 seconds to kill the command line before run
+  end
 end

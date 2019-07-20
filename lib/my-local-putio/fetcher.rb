@@ -20,7 +20,7 @@ module MyLocalPutio
       files = cli.get_files(id)["files"]
 
       while files.any?
-        file = OpenStruct.new files.pop
+        file = OpenStruct.new(files.pop)
         process_file(file, path)
       end
     end
@@ -30,19 +30,19 @@ module MyLocalPutio
       if file.content_type == "application/x-directory"
         fetch_files(id: file.id, path: file_path)
       else
-        return if check_file_exists?(file_path, file)
+        return if file_exists?(file_path, file)
         url = cli.get_download_url file.id
-        fetch(url, file_path)
+        download(url, file_path)
       end
     end
 
-    def check_file_exists?(file_path, file)
+    def file_exists?(file_path, file)
       file_exists = File.exists?(file_path) && File.size(file_path) == file.size
       logger.log "File already downloaded #{file_path}" if file_exists
       file_exists
     end
 
-    def fetch_command(url, path)
+    def download_command(url, path)
       command = [
         "curl", "--progress-bar", "-L", "--retry", "5", "-S", "-C", "-", "-o", path, url.to_s
       ]
@@ -56,8 +56,8 @@ module MyLocalPutio
       return command
     end
 
-    def fetch(url, path)
-      command = fetch_command(url, path)
+    def download(url, path)
+      command = download_command(url, path)
       logger.log "Downloading: #{path}"
       fetch_result = system(*command)
       raise "Unable to download #{path}" unless fetch_result

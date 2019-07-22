@@ -24,6 +24,8 @@ require "my-local-putio/configuration"
 require "my-local-putio/logger"
 require "my-local-putio/putio_cli"
 require "my-local-putio/fetcher"
+require "my-local-putio/downloader"
+require "my-local-putio/subtitles_manager"
 
 module MyLocalPutio
   def self.print_introduction_msg(configuration)

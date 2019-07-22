@@ -4,6 +4,7 @@
 - Breaking changes parameters
   - removed -s option for --silent. Now silent is only available as --silent
   - introduced -s option for --with-subtitles
+- More code refactoring
 
 # v3.0.1
 

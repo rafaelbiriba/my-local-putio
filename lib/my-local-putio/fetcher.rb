@@ -30,6 +30,7 @@ module MyLocalPutio
         fetch_files(id: file.id, path: local_file_path)
       else
         download(file, local_file_path) unless file_exists?(local_file_path, file)
+      delete_file(local_file_path, file) if configuration.delete_remote
       end
       delete_file(local_file_path, file)
     end

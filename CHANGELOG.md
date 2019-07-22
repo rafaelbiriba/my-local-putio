@@ -1,3 +1,7 @@
+# v3.0.1
+
+- Fix for delete-remote that was not enabling/disabling properly.
+
 # v3.0.0
 
 - Introducing delete from remote after downloading

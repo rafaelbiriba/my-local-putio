@@ -30,7 +30,7 @@ module MyLocalPutio
       if file.content_type == "application/x-directory"
         fetch_files(id: file.id, path: local_file_path)
       else
-        url = cli.get_download_url(file.id)
+        url = cli.get_download_url(file.id)["url"]
         Downloader.new(@configuration).download(url, local_file_path) unless file_exists?(local_file_path, file)
         SubtitlesManager.new(configuration).fetch(file, path)
       end

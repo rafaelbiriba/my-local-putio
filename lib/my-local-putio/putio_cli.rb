@@ -25,9 +25,7 @@ module MyLocalPutio
     end
 
     def get_download_url(id)
-      url = to_url("files/#{id}/download")
-      url.query = URI.encode_www_form to_args()
-      url
+      get("files/#{id}/url")
     end
 
     protected

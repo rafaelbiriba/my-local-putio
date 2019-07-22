@@ -1,3 +1,8 @@
+# v4.0.2
+
+- More code refactoring
+  - Put.io api /files/<id>/download is deprecated. Replacing to /files/<id>/url
+
 # v4.0.1
 
 - More code refactoring

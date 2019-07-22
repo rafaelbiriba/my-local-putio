@@ -39,7 +39,7 @@ module MyLocalPutio
 
     def delete_file(local_file_path, file)
       return unless configuration.delete_remote
-      logger.log "Deleting remote file: #{local_file_path}"
+      logger.log "Deleting remote #{file.file_type.downcase}: #{local_file_path}"
       cli.delete_file(file.id)
     end
 

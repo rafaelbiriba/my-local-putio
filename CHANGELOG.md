@@ -1,3 +1,7 @@
+# v4.0.1
+
+- More code refactoring
+
 # v4.0.0
 
 - Introducing with subtitles option

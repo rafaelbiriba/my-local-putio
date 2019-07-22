@@ -3,23 +3,17 @@ My Local Put.io [![Gem Version](https://badge.fury.io/rb/my-local-putio.svg)](ht
 
 The easiest script to synchronize all your [Put.io](http://put.io) files locally.
 
-For now the script only supports download the content from your account and keep it locally.
+After the download, you can enable the option to remove the files from Put.io and also download your preferred subtitles if available in Put.io.
 
 ### Features
 
-- Check and skip already downloaded files
-- Supports SOCKS5 proxy for an even more secure and anonymous transfer, with kill switch, so the application will stop if the proxy became unavailable. No leak connections.
+- Check and skip already downloaded files.
 - Resume broken/stopped downloads, so you don't have to start from the begin of your huge file.
-- Simple and easy to run
+- Supports SOCKS5 proxy for an even more secure and anonymous transfer, with kill switch, so the application will stop if the proxy became unavailable. No leak connections.
 - Option to delete the file from put.io after the download
-
-#### Planned features:
-
-- Option to download the subtitle if available in put.io list
-
-#### Future or ideas: (Feel free to contribute to the list)
-
-- Add a magnet/torrent to the put.io account based on local files or references.
+- Option to download your preferred subtitles from Put.io.
+- Simple and easy to run
+- For free and forever free :)
 
 ## Copyright Disclaimer
 
@@ -30,9 +24,13 @@ For now the script only supports download the content from your account and keep
 
 * Install ruby 2.6.0+
 * Generate a token for your put.io account: https://app.put.io/authenticate?client_id=1&response_type=oob
-* Install the `my-local-putio` gem:
+* Install the latest version of `my-local-putio` gem:
 
       gem install my-local-putio
+
+To update your installed version:
+
+      gem update my-local-putio
 
 ## Usage
 
@@ -56,6 +54,7 @@ Examples:
 
     my-local-putio -t 123 -l Downloads
     my-local-putio -l Downloads --token 123
+    my-local-putio -l Downloads -t token123 -d -s --socks5-proxy 127.0.0.1:1234
 
 With Token variable (inline or exporting):
 
@@ -69,7 +68,7 @@ With Token variable (inline or exporting):
 * **-s** or **--with-subtitles**: Download subtitles from Put.io API if available. (Remember to set your preferred subtitle language on Put.io Settings website, otherwise no subtitle will be available for download.)
 * **-h**: Print the help usage message
 * **-v** or **--version**: Print the version of the application
-* **--silent**: Hide all messages and progress bar
+* **--silent**: Hide all messages and progress bar. Recommended for Cronjob tasks.
 * **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
 * **--socks5-proxy**: Enable the SOCKS5 proxy. If enabled, all the connections for PUT.IO API and the downloads will be performed using this proxy. If the socks connection became unavailable, the application will raise an error and will stop.
 

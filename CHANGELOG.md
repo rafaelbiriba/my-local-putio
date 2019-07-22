@@ -1,3 +1,10 @@
+# v4.0.0
+
+- Introducing with subtitles option
+- Breaking changes parameters
+  - removed -s option for --silent. Now silent is only available as --silent
+  - introduced -s option for --with-subtitles
+
 # v3.0.1
 
 - Fix for delete-remote that was not enabling/disabling properly.

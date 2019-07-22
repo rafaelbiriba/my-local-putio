@@ -29,10 +29,36 @@ module MyLocalPutio
       if file.content_type == "application/x-directory"
         fetch_files(id: file.id, path: local_file_path)
       else
-        download(file, local_file_path) unless file_exists?(local_file_path, file)
-      delete_file(local_file_path, file) if configuration.delete_remote
+        url = cli.get_download_url(file.id)
+        download(url, local_file_path) unless file_exists?(local_file_path, file)
       end
-      delete_file(local_file_path, file)
+      get_subtitles_for(file, path) if configuration.with_subtitles
+      delete_file(local_file_path, file) if configuration.delete_remote
+    end
+
+    def file_is_video?(file)
+      file.file_type == "VIDEO"
+    end
+
+    def get_subtitles_for(file, path)
+      return unless file_is_video?(file)
+      local_subtitle_path = File.join(path, File.basename(file.name, File.extname(file.name)))
+      logger.log "Trying to fetch the preferred subtitle for: #{file.name}"
+      subtitles = cli.get_subtitles(file.id)["subtitles"]
+      if subtitles.empty?
+        logger.log ":( Could not find any preferred subtitle for: #{file.name}"
+        return
+      end
+      process_subtitle(subtitles, file, local_subtitle_path)
+    end
+
+    def process_subtitle(subtitles, file, local_subtitle_path)
+      subtitles_grouped = subtitles.group_by{|k,v| k["language_code"]}
+      subtitles_grouped.each do |language_code, list|
+        path = local_subtitle_path + ".#{language_code}.srt"
+        logger.log("Starting download of #{list.first["language"]} subtitle for #{file.name}")
+        download(list.first["url"], path)
+      end
     end
 
     def delete_file(local_file_path, file)
@@ -62,8 +88,8 @@ module MyLocalPutio
       return command
     end
 
-    def download(file, path)
-      url = cli.get_download_url(file.id)
+    def download(url, path)
+      logger.debug "Download file from #{url}"
       command = download_command(url, path)
       logger.log "Downloading: #{path}"
       fetch_result = system(*command)

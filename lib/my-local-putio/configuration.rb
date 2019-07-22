@@ -1,6 +1,6 @@
 module MyLocalPutio
   class Configuration
-    attr_reader :token, :local_destination, :silent, :debug, :socks_host, :socks_port, :delete_remote
+    attr_reader :token, :local_destination, :silent, :debug, :socks_host, :socks_port, :delete_remote, :with_subtitles
     def initialize
       read_args_from_envs!
       parse_args!
@@ -21,12 +21,13 @@ module MyLocalPutio
         opt.on("-t", "--token TOKEN", "Put.io access token [REQUIRED]") { |v| @token = v }
         opt.on("-l", "--local-destination PATH", "Local destination path [REQUIRED]") { |v| @local_destination = v }
         opt.on("-d", "--delete-remote", "Delete remote file/folder after the download") { |v| @delete_remote = true }
+        opt.on("-s", "--with-subtitles", "Fetch subtitles from Put.io api") { |v| @with_subtitles = true }
         opt.on("-v", "--version", "Print my-local-putio version") do
           puts MyLocalPutio::VERSION
           exit
         end
 
-        opt.on("-s", "--silent", "Hide all messages and progress bar") { |v| @silent = true }
+        opt.on("--silent", "Hide all messages and progress bar") { |v| @silent = true }
         opt.on("--debug", "Debug mode [Developer mode]") { |v| @debug = true }
         opt.on("--socks5-proxy hostname:port", "SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234") do |v|
           @socks_host, @socks_port = v.to_s.split(":")

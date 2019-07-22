@@ -20,10 +20,8 @@ module MyLocalPutio
       post("files/delete", args)
     end
 
-    def delete_file_url
-      url = to_url("files/delete")
-      url.query = URI.encode_www_form to_args()
-      url
+    def get_subtitles(id)
+      get("files/#{id}/subtitles")
     end
 
     def get_download_url(id)

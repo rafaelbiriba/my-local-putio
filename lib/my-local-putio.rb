@@ -33,6 +33,7 @@ module MyLocalPutio
     puts "============================================="
     puts "Full path of the local destination: #{File.realdirpath(configuration.local_destination)}"
     puts ">>> Delete remote files enabled!" if configuration.delete_remote
+    puts ">>> With subtitles enabled!" if configuration.with_subtitles
     puts ">>> SOCKS5 enabled with #{configuration.socks_host}:#{configuration.socks_port}" if configuration.socks_enabled?
     puts ">>> DEBUG enabled! Hello Mr(s) developer :)" if configuration.debug
     puts "============================================="

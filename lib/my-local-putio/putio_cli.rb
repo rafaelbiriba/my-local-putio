@@ -11,7 +11,7 @@ module MyLocalPutio
     end
 
     def get_files(parent_id=nil)
-      args = parent_id ? {parent_id: parent_id} : {}
+      args = parent_id ? {parent_id: parent_id, sort: "NAME_DESC"} : {sort: "DATE_DESC"}
       get("files/list", args)
     end
 

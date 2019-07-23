@@ -1,3 +1,11 @@
+# v4.1.0
+
+- Change download order from put.io:
+  - Main Directory: Ordered by added dated `desc`, older will start first
+  - Subfolder: Ordered by Name
+  - With this changes the script will start download the older folder, and will start download the episode n1 from that folder.
+  - Example: The main dir have `new_folder1/video1.mp4`, `new_folder2/video2.mp4`, `old_folder/video1.mp4`, `old_folder/video2.mp4` before this changes the script will download using the last defined by the user (at the interface), so the behaviour would be different based on the user preferences. With the new changes, the first to download will be `old_folder/video1.mp4`, and then `old_folder/video2.mp4`.
+
 # v4.0.2
 
 - More code refactoring

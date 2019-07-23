@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    my-local-putio (4.0.2)
+    my-local-putio (4.1.0)
       socksify (= 1.7.1)
 
 GEM

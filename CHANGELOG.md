@@ -1,3 +1,9 @@
+# v4.2.0
+
+- Introducing temporary destination
+  - By default the temporary destination for files will be your local destination + "incomplete_downloads"
+  - You can overwrite the temporary directory with the option --temp-destination
+
 # v4.1.0
 
 - Change download order from put.io:

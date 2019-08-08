@@ -4,7 +4,7 @@ require "bundler/setup"
 require "my-local-putio"
 
 unless open(__FILE__).flock(File::LOCK_EX | File::LOCK_NB)
-  puts "Script already running..."
+  puts "my-local-putio is already running..."
   exit
 end
 

@@ -38,10 +38,11 @@ To update your installed version:
 
     Usage: my-local-putio [options]
       -t, --token TOKEN                Put.io access token [REQUIRED]
-      -l, --local-destination PATH     Local destination path [REQUIRED]
+      -l, --local-destination FULLPATH Local destination path [REQUIRED]
       -d, --delete-remote              Delete remote file/folder after the download
       -s, --with-subtitles             Fetch subtitles from Put.io api
       -v, --version                    Print my-local-putio version
+          --temp-destination FULLPATH  Temporary destination for the incomplete downloads (Default: 'local_destination'/incomplete_downloads)
           --silent                     Hide all messages and progress bar
           --debug                      Debug mode [Developer mode]
           --socks5-proxy hostname:port SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234
@@ -68,6 +69,7 @@ With Token variable (inline or exporting):
 * **-s** or **--with-subtitles**: Download subtitles from Put.io API if available. (Remember to set your preferred subtitle language on Put.io Settings website, otherwise no subtitle will be available for download.)
 * **-h**: Print the help usage message
 * **-v** or **--version**: Print the version of the application
+* **--temp-destination**: Overwrite the default path (incomplete_downloads folder) of the temporary download files. After the download the complete file is moved to the selected local destination.
 * **--silent**: Hide all messages and progress bar. Recommended for Cronjob tasks.
 * **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
 * **--socks5-proxy**: Enable the SOCKS5 proxy. If enabled, all the connections for PUT.IO API and the downloads will be performed using this proxy. If the socks connection became unavailable, the application will raise an error and will stop.
@@ -77,17 +79,19 @@ Examples:
     my-local-putio -h
     my-local-putio -t 123 -l Downloads --silent -d -s
     my-local-putio -t 123 -l Downloads --silent
+    my-local-putio -l Downloads -t 123 --temp-destination /tmp --with-subtitles
     my-local-putio --local-destination Downloads -t 123 --debug --with-subtitles
     my-local-putio --local-destination Downloads -t 123 --socks5-proxy 127.0.0.1:3333
 
 Verbose output example:
 
-    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333
+    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333 --temp-destination /tmp
 
     Starting My Local Put.io - version 3.0.0
     https://github.com/rafaelbiriba/my-local-putio
     =============================================
     Full path of the local destination: /Users/user/Downloads
+    Full path of the temporary destination: /tmp
     >>> Delete remote files enabled!
     >>> With subtitles enabled!
     >>> SOCKS5 enabled with 127.0.0.1:3333
@@ -97,6 +101,7 @@ Verbose output example:
     [LOG][2019-07-18 11:11:31] Downloading: /ubuntu/ubuntu-18.04.2-desktop-amd64.iso
     ######################################################################## 100.0%
     [LOG][2019-07-18 11:11:33] Deleting remote file: /ubuntu/ubuntu-18.04.2-desktop-amd64.iso
+    [LOG][2019-07-18 11:11:34] Finishing the download...
 
 #### Troubleshooting
 

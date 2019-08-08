@@ -19,6 +19,7 @@ require "openssl"
 require "ostruct"
 require "yaml"
 require "optparse"
+require "fileutils"
 require "my-local-putio/version"
 require "my-local-putio/configuration"
 require "my-local-putio/logger"
@@ -34,6 +35,7 @@ module MyLocalPutio
     puts "https://github.com/rafaelbiriba/my-local-putio"
     puts "============================================="
     puts "Full path of the local destination: #{File.realdirpath(configuration.local_destination)}"
+    puts "Full path of the temporary destination: #{File.realdirpath(configuration.temp_destination)}"
     puts ">>> Delete remote files enabled!" if configuration.delete_remote
     puts ">>> With subtitles enabled!" if configuration.with_subtitles
     puts ">>> SOCKS5 enabled with #{configuration.socks_host}:#{configuration.socks_port}" if configuration.socks_enabled?

@@ -27,6 +27,8 @@ require "my-local-putio/putio_cli"
 require "my-local-putio/fetcher"
 require "my-local-putio/downloader"
 require "my-local-putio/subtitles_manager"
+require "my-local-putio/disk_manager"
+
 
 module MyLocalPutio
   def self.print_introduction_msg(configuration)
@@ -34,11 +36,12 @@ module MyLocalPutio
     puts "Starting My Local Put.io - version #{VERSION}"
     puts "https://github.com/rafaelbiriba/my-local-putio"
     puts "============================================="
-    puts "Full path of the local destination: #{File.realdirpath(configuration.local_destination)}"
-    puts "Full path of the temporary destination: #{File.realdirpath(configuration.temp_destination)}"
+    puts "Full path of the local destination: #{File.realdirpath(configuration.local_destination)} (Free space: #{configuration.disk_manager.get_folder_free_space(configuration.local_destination)} MB)"
+    puts "Full path of the temporary destination: #{File.realdirpath(configuration.temp_destination)} (Free space: #{configuration.disk_manager.get_folder_free_space(configuration.temp_destination)} MB)"
     puts ">>> Delete remote files enabled!" if configuration.delete_remote
     puts ">>> With subtitles enabled!" if configuration.with_subtitles
     puts ">>> SOCKS5 enabled with #{configuration.socks_host}:#{configuration.socks_port}" if configuration.socks_enabled?
+    puts ">>> With disk threshold of #{configuration.disk_threshold} MB!" if configuration.disk_threshold
     puts ">>> DEBUG enabled! Hello Mr(s) developer :)" if configuration.debug
     puts "============================================="
     sleep 2 # In case the configurations are not correct, 2 seconds to kill the command line before run

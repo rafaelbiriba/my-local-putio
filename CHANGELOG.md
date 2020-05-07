@@ -1,3 +1,8 @@
+# v4.3.0
+
+- Introducing --disk-threshold
+  - Check if there is enough space on the disk (download/temporary folder) before download another file
+
 # v4.2.0
 
 - Introducing temporary destination

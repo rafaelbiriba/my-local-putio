@@ -1,12 +1,18 @@
 module MyLocalPutio
   class Configuration
     attr_reader :token, :local_destination, :temp_destination,
-                :silent, :debug, :socks_host, :socks_port, :delete_remote, :with_subtitles
+                :silent, :debug, :socks_host, :socks_port, :delete_remote, :with_subtitles,
+                :disk_threshold
+
     def initialize
       read_args_from_envs!
       parse_args!
       set_defaults!
       validate_args!
+    end
+
+    def disk_manager
+      @disk_manager ||= DiskManager.new(self)
     end
 
     def socks_enabled?
@@ -34,6 +40,9 @@ module MyLocalPutio
         opt.on("--debug", "Debug mode [Developer mode]") { |v| @debug = true }
         opt.on("--socks5-proxy hostname:port", "SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234") do |v|
           @socks_host, @socks_port = v.to_s.split(":")
+        end
+        opt.on("--disk-threshold size", "Stops the downloads when the disk space threshold is reached. (Size in MB, e.g: 2000 for 2GB)") do |v|
+          @disk_threshold = v.to_i
         end
       end.parse!
     end

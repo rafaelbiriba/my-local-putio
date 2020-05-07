@@ -46,6 +46,7 @@ To update your installed version:
           --silent                     Hide all messages and progress bar
           --debug                      Debug mode [Developer mode]
           --socks5-proxy hostname:port SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234
+          --disk-threshold size        Stops the downloads when the disk space threshold is reached. (Size in MB, e.g: 2000 for 2GB)
 
 #### Required attributes:
 * **-t** or **--token**: Your Put.io Token. This attribute becames optional if you set `PUTIO_TOKEN` env variable with your token (Can be inline or into your bash profile). Check examples below.
@@ -56,6 +57,7 @@ Examples:
     my-local-putio -t 123 -l Downloads
     my-local-putio -l Downloads --token 123
     my-local-putio -l Downloads -t token123 -d -s --socks5-proxy 127.0.0.1:1234
+    my-local-putio -d -s --disk-threshold size 1000
 
 With Token variable (inline or exporting):
 
@@ -73,6 +75,7 @@ With Token variable (inline or exporting):
 * **--silent**: Hide all messages and progress bar. Recommended for Cronjob tasks.
 * **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
 * **--socks5-proxy**: Enable the SOCKS5 proxy. If enabled, all the connections for PUT.IO API and the downloads will be performed using this proxy. If the socks connection became unavailable, the application will raise an error and will stop.
+* **--disk-threshold**: Set a disk threshold **(in MB)** to prevent the script to fill up the entire disk. The threshold value is in MB **(e.g 1000 for 1GB)**. The script will test both download folder and temporary folder to detect if there is enough space before download each file. If the free space is less than (file size + disk threshold) the script will stop. (Example: If the folder have 10GB available, and the threshold is set to 2GB (2000), the script will stop before start downloading a file with 9GB size)
 
 Examples:
 
@@ -82,19 +85,21 @@ Examples:
     my-local-putio -l Downloads -t 123 --temp-destination /tmp --with-subtitles
     my-local-putio --local-destination Downloads -t 123 --debug --with-subtitles
     my-local-putio --local-destination Downloads -t 123 --socks5-proxy 127.0.0.1:3333
+    my-local-putio -d -s --disk-threshold size 1000
 
 Verbose output example:
 
-    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333 --temp-destination /tmp
+    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333 --temp-destination /tmp --disk-threshold size 2000
 
-    Starting My Local Put.io - version 3.0.0
+    Starting My Local Put.io - version 4.3.0
     https://github.com/rafaelbiriba/my-local-putio
     =============================================
-    Full path of the local destination: /Users/user/Downloads
-    Full path of the temporary destination: /tmp
+    Full path of the local destination: /Users/user/Downloads (Free space: 19667 MB)
+    Full path of the temporary destination: /tmp (Free space: 8543 MB)
     >>> Delete remote files enabled!
     >>> With subtitles enabled!
     >>> SOCKS5 enabled with 127.0.0.1:3333
+    >>> With disk threshold of 2000 MB!
     =============================================
     [LOG][2019-07-18 11:11:30] Getting file list for /
     [LOG][2019-07-18 11:11:31] Getting file list for /ubuntu

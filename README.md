@@ -57,7 +57,7 @@ Examples:
     my-local-putio -t 123 -l Downloads
     my-local-putio -l Downloads --token 123
     my-local-putio -l Downloads -t token123 -d -s --socks5-proxy 127.0.0.1:1234
-    my-local-putio -d -s --disk-threshold size 1000
+    my-local-putio -d -s --disk-threshold 1000
 
 With Token variable (inline or exporting):
 
@@ -85,11 +85,11 @@ Examples:
     my-local-putio -l Downloads -t 123 --temp-destination /tmp --with-subtitles
     my-local-putio --local-destination Downloads -t 123 --debug --with-subtitles
     my-local-putio --local-destination Downloads -t 123 --socks5-proxy 127.0.0.1:3333
-    my-local-putio -d -s --disk-threshold size 1000
+    my-local-putio -d -s --disk-threshold 1000
 
 Verbose output example:
 
-    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333 --temp-destination /tmp --disk-threshold size 2000
+    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333 --temp-destination /tmp --disk-threshold 2000
 
     Starting My Local Put.io - version 4.3.0
     https://github.com/rafaelbiriba/my-local-putio

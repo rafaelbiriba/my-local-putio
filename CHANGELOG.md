@@ -1,4 +1,4 @@
-# ?
+# v4.4.0
 
 - Introducing --detailed-progress
   - Display the default curl output with a detailed information of the download, instead of a simple progress bar.

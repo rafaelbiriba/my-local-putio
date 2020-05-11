@@ -1,3 +1,9 @@
+# v4.3.1
+
+- Bugfix: Already downloaded files no longer need to be downloaded again
+  - No parameter is necessary this is the default behaviour
+  - The codes matches the name and the filesize
+
 # v4.3.0
 
 - Introducing --disk-threshold

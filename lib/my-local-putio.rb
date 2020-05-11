@@ -40,6 +40,7 @@ module MyLocalPutio
     puts "Full path of the temporary destination: #{File.realdirpath(configuration.temp_destination)} (Free space: #{configuration.disk_manager.get_folder_free_space(configuration.temp_destination)} MB)"
     puts ">>> Delete remote files enabled!" if configuration.delete_remote
     puts ">>> With subtitles enabled!" if configuration.with_subtitles
+    puts ">>> With detailed progress bar!" if configuration.detailed_progress
     puts ">>> SOCKS5 enabled with #{configuration.socks_host}:#{configuration.socks_port}" if configuration.socks_enabled?
     puts ">>> With disk threshold of #{configuration.disk_threshold} MB!" if configuration.disk_threshold
     puts ">>> DEBUG enabled! Hello Mr(s) developer :)" if configuration.debug

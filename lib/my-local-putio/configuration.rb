@@ -2,7 +2,7 @@ module MyLocalPutio
   class Configuration
     attr_reader :token, :local_destination, :temp_destination,
                 :silent, :debug, :socks_host, :socks_port, :delete_remote, :with_subtitles,
-                :disk_threshold
+                :disk_threshold, :detailed_progress
 
     def initialize
       read_args_from_envs!
@@ -35,14 +35,20 @@ module MyLocalPutio
           exit
         end
 
-        opt.on("--temp-destination FULLPATH", "Temporary destination for the incomplete downloads (Default: 'local_destination'/incomplete_downloads)") { |v| @temp_destination = v }
-        opt.on("--silent", "Hide all messages and progress bar") { |v| @silent = true }
         opt.on("--debug", "Debug mode [Developer mode]") { |v| @debug = true }
-        opt.on("--socks5-proxy hostname:port", "SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234") do |v|
-          @socks_host, @socks_port = v.to_s.split(":")
-        end
+
         opt.on("--disk-threshold size", "Stops the downloads when the disk space threshold is reached. (Size in MB, e.g: 2000 for 2GB)") do |v|
           @disk_threshold = v.to_i
+        end
+
+        opt.on("--detailed-progress", "Detailed download information instead a progress bar") { |v| @detailed_progress = true }
+
+        opt.on("--temp-destination FULLPATH", "Temporary destination for the incomplete downloads (Default: 'local_destination'/incomplete_downloads)") { |v| @temp_destination = v }
+
+        opt.on("--silent", "Hide all messages and progress bar") { |v| @silent = true }
+
+        opt.on("--socks5-proxy hostname:port", "SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234") do |v|
+          @socks_host, @socks_port = v.to_s.split(":")
         end
       end.parse!
     end

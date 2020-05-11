@@ -1,3 +1,8 @@
+# ?
+
+- Introducing --detailed-progress
+  - Display the default curl output with a detailed information of the download, instead of a simple progress bar.
+
 # v4.3.1
 
 - Bugfix: Already downloaded files no longer need to be downloaded again

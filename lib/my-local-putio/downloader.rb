@@ -40,8 +40,10 @@ module MyLocalPutio
       temp_destination = File.join(configuration.temp_destination, path)
 
       command = [
-        "curl", "--create-dirs", "--progress-bar", "-L", "--retry", "5", "-S", "-C", "-", "-o", temp_destination, url.to_s
+        "curl", "--create-dirs", "-L", "--retry", "5", "-S", "-C", "-", "-o", temp_destination, url.to_s
       ]
+
+      command.push("--progress-bar") unless configuration.detailed_progress
 
       command.push("--silent") if logger.silent?
 

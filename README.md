@@ -42,11 +42,12 @@ To update your installed version:
       -d, --delete-remote              Delete remote file/folder after the download
       -s, --with-subtitles             Fetch subtitles from Put.io api
       -v, --version                    Print my-local-putio version
+          --debug                      Debug mode [Developer mode]
+          --disk-threshold size        Stops the downloads when the disk space threshold is reached. (Size in MB, e.g: 2000 for 2GB)
+          --detailed-progress          Detailed download information instead a progress bar
           --temp-destination FULLPATH  Temporary destination for the incomplete downloads (Default: 'local_destination'/incomplete_downloads)
           --silent                     Hide all messages and progress bar
-          --debug                      Debug mode [Developer mode]
           --socks5-proxy hostname:port SOCKS5 hostname and port for proxy. Format: 127.0.0.1:1234
-          --disk-threshold size        Stops the downloads when the disk space threshold is reached. (Size in MB, e.g: 2000 for 2GB)
 
 #### Required attributes:
 * **-t** or **--token**: Your Put.io Token. This attribute becames optional if you set `PUTIO_TOKEN` env variable with your token (Can be inline or into your bash profile). Check examples below.
@@ -71,11 +72,12 @@ With Token variable (inline or exporting):
 * **-s** or **--with-subtitles**: Download subtitles from Put.io API if available. (Remember to set your preferred subtitle language on Put.io Settings website, otherwise no subtitle will be available for download.)
 * **-h**: Print the help usage message
 * **-v** or **--version**: Print the version of the application
+* **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
+* **--disk-threshold**: Set a disk threshold **(in MB)** to prevent the script to fill up the entire disk. The threshold value is in MB **(e.g 1000 for 1GB)**. The script will test both download folder and temporary folder to detect if there is enough space before download each file. If the free space is less than (file size + disk threshold) the script will stop. (Example: If the folder have 10GB available, and the threshold is set to 2GB (2000), the script will stop before start downloading a file with 9GB size)
+* **--detailed-progress**: Display the default curl output with a detailed information of the download, instead of a simple progress bar.
 * **--temp-destination**: Overwrite the default path (incomplete_downloads folder) of the temporary download files. After the download the complete file is moved to the selected local destination.
 * **--silent**: Hide all messages and progress bar. Recommended for Cronjob tasks.
-* **--debug**: Developer mode: Prints everything and expose URLs with tokens for debug purposes.
 * **--socks5-proxy**: Enable the SOCKS5 proxy. If enabled, all the connections for PUT.IO API and the downloads will be performed using this proxy. If the socks connection became unavailable, the application will raise an error and will stop.
-* **--disk-threshold**: Set a disk threshold **(in MB)** to prevent the script to fill up the entire disk. The threshold value is in MB **(e.g 1000 for 1GB)**. The script will test both download folder and temporary folder to detect if there is enough space before download each file. If the free space is less than (file size + disk threshold) the script will stop. (Example: If the folder have 10GB available, and the threshold is set to 2GB (2000), the script will stop before start downloading a file with 9GB size)
 
 Examples:
 
@@ -89,7 +91,7 @@ Examples:
 
 Verbose output example:
 
-    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333 --temp-destination /tmp --disk-threshold 2000
+    my-local-putio -t 123 -l Downloads -d -s --socks5-proxy 127.0.0.1:3333 --temp-destination /tmp --disk-threshold 2000 --detailed-progress
 
     Starting My Local Put.io - version 4.3.0
     https://github.com/rafaelbiriba/my-local-putio
@@ -98,6 +100,7 @@ Verbose output example:
     Full path of the temporary destination: /tmp (Free space: 8543 MB)
     >>> Delete remote files enabled!
     >>> With subtitles enabled!
+    >>> With detailed progress bar!
     >>> SOCKS5 enabled with 127.0.0.1:3333
     >>> With disk threshold of 2000 MB!
     =============================================

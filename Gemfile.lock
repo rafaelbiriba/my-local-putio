@@ -14,9 +14,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.0)
+  bundler (~> 2.3)
   my-local-putio!
   rake (~> 13.0)
 
 BUNDLED WITH
-   2.2.22
+   2.3.17

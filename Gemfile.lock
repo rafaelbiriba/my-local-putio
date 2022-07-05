@@ -7,7 +7,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    rake (13.0.1)
+    rake (13.0.6)
     socksify (1.7.1)
 
 PLATFORMS

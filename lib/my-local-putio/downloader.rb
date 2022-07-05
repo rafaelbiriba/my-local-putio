@@ -37,7 +37,7 @@ module MyLocalPutio
     end
 
     def download_command(url, path)
-      temp_destination = File.join(configuration.temp_destination, path)
+      temp_destination = File.join(configuration.temp_destination, File.dirname(path))
 
       command = [
         "curl", "--create-dirs", "-L", "--retry", "5", "-S", "-C", "-", "-o", temp_destination, url.to_s

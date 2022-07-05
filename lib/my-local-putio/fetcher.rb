@@ -29,14 +29,20 @@ module MyLocalPutio
     def process_file(file, path)
       file_path = File.join(path, file.name)
       if file.content_type == "application/x-directory"
-        fetch_files(id: file.id, path: file_path)
+        while !directory_empty?(file)
+          fetch_files(id: file.id, path: file_path)
+        end
       else
         url = cli.get_download_url(file.id)["url"]
         disk_manager.check_for_available_space_on_destinations!(file.size/1024/1024)
         Downloader.new(@configuration).download(url, file_path) unless file_exists?(file_path, file)
         SubtitlesManager.new(configuration).fetch(file, path)
       end
-      delete_file(file_path, file)
+      delete_file(file_path, file) 
+    end
+
+    def directory_empty?(file)
+      cli.get_files(file.id)["files"].count < 1
     end
 
     def delete_file(file_path, file)

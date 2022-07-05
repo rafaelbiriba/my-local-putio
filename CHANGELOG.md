@@ -1,3 +1,8 @@
+# v4.4.1
+
+- Bugfix: Checking if folder is empty before removing it, due to per page limit
+- Bugfix: Downloader creating folder dir when downloading a single file
+
 # v4.4.0
 
 - Introducing --detailed-progress
